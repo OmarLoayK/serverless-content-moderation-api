@@ -33,7 +33,7 @@ curl -X POST https://<api-id>.execute-api.us-east-1.amazonaws.com/moderate \
   -H "Content-Type: application/json" \
   -d '{"text": "your text here"}'
 ```
-
+The live endpoint URL is intentionally omitted from this repo — the API currently has no authentication or rate limiting, so publishing it would allow arbitrary invocation against the account's Bedrock quota.
 **Flagged content:**
 
 ```json
