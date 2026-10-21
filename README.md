@@ -88,6 +88,15 @@ The live endpoint URL is intentionally omitted from this repo — the API curren
 - **Single-model classification.** No ensemble, no confidence threshold tuning, no human review queue for borderline cases — all of which a production moderation system would need.
 - **No evaluation set.** Correctness was verified on hand-picked positive and negative cases, not measured against a labeled dataset. Real precision and recall numbers are unknown.
 
+## Setup
+
+1. Create a DynamoDB table `moderation-logs` with partition key `request_id` (String).
+2. Create a Python Lambda function and attach Bedrock and DynamoDB permissions to its execution role.
+3. Set environment variables `MODEL_ID` and `TABLE_NAME`.
+4. Set the Lambda timeout to 30 seconds — the 3-second default will abort mid-inference.
+5. Create an HTTP API in API Gateway with a `POST /moderate` route integrated to the function.
+6. Request Bedrock model access in the console and confirm invocation works in the playground before testing the endpoint.
+
 ## Stack
 
 AWS Lambda · API Gateway · Amazon Bedrock · DynamoDB · IAM · Python 3.14 · boto3
